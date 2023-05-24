@@ -1,6 +1,19 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
+/* custom commands */
+static const char *audioctl[]            = { "/usr/bin/pavucontrol",              NULL };
+static const char *lockscrn[]            = { "/usr/local/bin/slock",              NULL };
+static const char *scrnshot[]            = { "/usr/local/bin/screenshotutil",     NULL };
+//static const char *brightup[]            = { "/usr/local/bin/backlightctl", "-u", NULL };
+//static const char *brightdown[]          = { "/usr/local/bin/backlightctl", "-d", NULL };
+static const char *volup[]               = { "/usr/local/bin/volumectl", "-u",    NULL };
+static const char *voldown[]             = { "/usr/local/bin/volumectl", "-d",    NULL };
+static const char *volmute[]             = { "/usr/local/bin/volumectl", "-m",    NULL };
+static const char *netmcmd[]             = { "alacritty", "-e", "nmtui",          NULL };
+//static const char *bluecmd[]             = { "alacritty", "-e", "bluetuith",      NULL };
+
 #if ROUNDED_CORNERS_PATCH
 static const unsigned int borderpx       = 0;   /* border pixel of windows */
 static const int corner_radius           = 10;
@@ -18,10 +31,10 @@ static const int scalepreview            = 4;        /* Tag preview scaling */
 static int nomodbuttons                  = 1;   /* allow client mouse button bindings that have no modifier */
 #endif // NO_MOD_BUTTONS_PATCH
 #if VANITYGAPS_PATCH
-static const unsigned int gappih         = 20;  /* horiz inner gap between windows */
-static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
-static const unsigned int gappoh         = 10;  /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 30;  /* vert outer gap between windows and screen edge */
+static const unsigned int gappih         = 8;  /* horiz inner gap between windows */
+static const unsigned int gappiv         = 8;  /* vert inner gap between windows */
+static const unsigned int gappoh         = 8;  /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 8;  /* vert outer gap between windows and screen edge */
 static const int smartgaps_fact          = 1;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 #endif // VANITYGAPS_PATCH
 #if AUTOSTART_PATCH
@@ -156,49 +169,49 @@ static void (*bartabmonfns[])(Monitor *) = { NULL /* , customlayoutfn */ };
 #if BAR_PANGO_PATCH
 static const char font[]                 = "monospace 10";
 #else
-static const char *fonts[]               = { "monospace:size=10" };
+static const char *fonts[]               = { "JetBrainsMono:size=9" };
 #endif // BAR_PANGO_PATCH
-static const char dmenufont[]            = "monospace:size=10";
+static const char dmenufont[]            = "JetBrainsMono:size=9";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
-static char normfgcolor[]                = "#bbbbbb";
-static char normbgcolor[]                = "#222222";
-static char normbordercolor[]            = "#444444";
+static char normfgcolor[]                = "#d8caac";
+static char normbgcolor[]                = "#2f383e";
+static char normbordercolor[]            = "#868d80";
 static char normfloatcolor[]             = "#db8fd9";
 
-static char selfgcolor[]                 = "#eeeeee";
-static char selbgcolor[]                 = "#005577";
-static char selbordercolor[]             = "#005577";
-static char selfloatcolor[]              = "#005577";
+static char selfgcolor[]                 = "#2f383e";
+static char selbgcolor[]                 = "#a7c080";
+static char selbordercolor[]             = "#a7c080";
+static char selfloatcolor[]              = "#a7c080";
 
-static char titlenormfgcolor[]           = "#bbbbbb";
-static char titlenormbgcolor[]           = "#222222";
-static char titlenormbordercolor[]       = "#444444";
+static char titlenormfgcolor[]           = "#d8caac";
+static char titlenormbgcolor[]           = "#2f383e";
+static char titlenormbordercolor[]       = "#868d80";
 static char titlenormfloatcolor[]        = "#db8fd9";
 
-static char titleselfgcolor[]            = "#eeeeee";
-static char titleselbgcolor[]            = "#005577";
-static char titleselbordercolor[]        = "#005577";
-static char titleselfloatcolor[]         = "#005577";
+static char titleselfgcolor[]            = "#2f383e";
+static char titleselbgcolor[]            = "#a7c080";
+static char titleselbordercolor[]        = "#a7c080";
+static char titleselfloatcolor[]         = "#a7c080";
 
-static char tagsnormfgcolor[]            = "#bbbbbb";
-static char tagsnormbgcolor[]            = "#222222";
-static char tagsnormbordercolor[]        = "#444444";
+static char tagsnormfgcolor[]            = "#d8caac";
+static char tagsnormbgcolor[]            = "#2f383e";
+static char tagsnormbordercolor[]        = "#868d80";
 static char tagsnormfloatcolor[]         = "#db8fd9";
 
-static char tagsselfgcolor[]             = "#eeeeee";
-static char tagsselbgcolor[]             = "#005577";
-static char tagsselbordercolor[]         = "#005577";
-static char tagsselfloatcolor[]          = "#005577";
+static char tagsselfgcolor[]             = "#2f383e";
+static char tagsselbgcolor[]             = "#a7c080";
+static char tagsselbordercolor[]         = "#a7c080";
+static char tagsselfloatcolor[]          = "#a7c080";
 
-static char hidnormfgcolor[]             = "#005577";
+static char hidnormfgcolor[]             = "#a7c080";
 static char hidselfgcolor[]              = "#227799";
-static char hidnormbgcolor[]             = "#222222";
-static char hidselbgcolor[]              = "#222222";
+static char hidnormbgcolor[]             = "#2f383e";
+static char hidselbgcolor[]              = "#2f383e";
 
-static char urgfgcolor[]                 = "#bbbbbb";
-static char urgbgcolor[]                 = "#222222";
+static char urgfgcolor[]                 = "#d8caac";
+static char urgbgcolor[]                 = "#2f383e";
 static char urgbordercolor[]             = "#ff0000";
 static char urgfloatcolor[]              = "#db8fd9";
 
@@ -251,7 +264,7 @@ static char selfloatbgcolor[]            = "#117799";
 #endif // BAR_FLEXWINTITLE_PATCH
 
 #if BAR_ALPHA_PATCH
-static const unsigned int baralpha = 0xd0;
+static const unsigned int baralpha = 0xE6;
 static const unsigned int borderalpha = OPAQUE;
 static const unsigned int alphas[][3] = {
 	/*                       fg      bg        border     */
@@ -443,7 +456,8 @@ static char tagicons[][NUMTAGS][MAX_TAGLEN] =
 static char *tagicons[][NUMTAGS] =
 #endif // NAMETAG_PATCH
 {
-	[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+	//[DEFAULT_TAGS]      = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+    [DEFAULT_TAGS]        = {"term", "edit",  "file", "www", "docs", "comm", "media", "misc", "misc"},
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
 	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
 };
@@ -469,8 +483,7 @@ static const int tagrows = 2;
  * A traditional struct table looks like this:
  *    // class      instance  title  wintype  tags mask  isfloating  monitor
  *    { "Gimp",     NULL,     NULL,  NULL,    1 << 4,    0,          -1 },
- *    { "Firefox",  NULL,     NULL,  NULL,    1 << 7,    0,          -1 },
- *
+ *    { "Firefox",  NULL,     NULL,  NULL,    1 << 7,    0,         *
  * The RULE macro has the default values set for each field allowing you to only
  * specify the values that are relevant for your rule, e.g.
  *
@@ -487,12 +500,19 @@ static const Rule rules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	RULE(.wintype = WTYPE "DIALOG", .isfloating = 1)
-	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
-	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
-	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
-	RULE(.class = "Gimp", .tags = 1 << 4)
-	RULE(.class = "Firefox", .tags = 1 << 7)
+	RULE(.wintype = WTYPE "DIALOG",  .isfloating = 1      )
+	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1      )
+	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1      )
+	RULE(.wintype = WTYPE "SPLASH",  .isfloating = 1      )
+	RULE(.class   = "Gimp",          .tags       = 1 << 1 )
+	RULE(.class   = "Firefox",       .tags       = 1 << 7 )
+    RULE(.class   = "Nitrogen",      .tags       = 0      )
+    RULE(.class   = "Alacritty",     .tags       = 0      )
+    RULE(.class   = "Nemo",          .tags       = 1 << 2 )
+    RULE(.class   = "Code",          .tags       = 1 << 1 )
+    RULE(.class   = "Pavucontrol",   .tags       = 0      )
+    RULE(.class   = "firefox",       .tags       = 1 << 3 )
+    RULE(.class   = "Spotify",       .tags       = 1 << 6 )
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
 	#elif SCRATCHPADS_PATCH
@@ -863,7 +883,7 @@ static const char *dmenucmd[] = {
 	#endif // BAR_DMENUMATCHTOP_PATCH
 	NULL
 };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
@@ -891,6 +911,18 @@ static const Key on_empty_keys[] = {
 
 static const Key keys[] = {
 	/* modifier                     key            function                argument */
+    /* custom keybinds */
+    { 0,                 XK_Print,                 spawn,                  {.v = scrnshot } },
+    //{ 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = brightup } },
+    //{ 0,                 XF86XK_MonBrightnessDown, spawn,                  {.v = brightdown } },
+    { 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
+    { 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
+    { 0,                 XF86XK_AudioRaiseVolume,  spawn,                  {.v = volup } },
+    { MODKEY | ShiftMask,           XK_a,          spawn,                  {.v = audioctl } },
+    { MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
+    //{ MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
+    { MODKEY | ShiftMask,           XK_l,          spawn,                  {.v = lockscrn } },
+
 	#if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
@@ -1104,7 +1136,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_t,          unfloatvisible,         {.v = &layouts[0]} },
 	#endif // UNFLOATVISIBLE_PATCH
 	#if TOGGLEFULLSCREEN_PATCH
-	{ MODKEY,                       XK_y,          togglefullscreen,       {0} },
+	{ MODKEY|ShiftMask,             XK_f,          togglefullscreen,       {0} },
 	#endif // TOGGLEFULLSCREEN_PATCH
 	#if !FAKEFULLSCREEN_PATCH && FAKEFULLSCREEN_CLIENT_PATCH
 	{ MODKEY|ShiftMask,             XK_y,          togglefakefullscreen,   {0} },
