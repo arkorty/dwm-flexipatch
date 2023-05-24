@@ -13,6 +13,7 @@ static const char *voldown[]             = { "/usr/local/bin/volumectl", "-d",  
 static const char *volmute[]             = { "/usr/local/bin/volumectl", "-m",    NULL };
 static const char *netmcmd[]             = { "alacritty", "-e", "nmtui",          NULL };
 //static const char *bluecmd[]             = { "alacritty", "-e", "bluetuith",      NULL };
+/* end custom commands */
 
 #if ROUNDED_CORNERS_PATCH
 static const unsigned int borderpx       = 0;   /* border pixel of windows */
@@ -922,8 +923,9 @@ static const Key keys[] = {
     { MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
     //{ MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
     { MODKEY | ShiftMask,           XK_l,          spawn,                  {.v = lockscrn } },
-
-	#if KEYMODES_PATCH
+    /* end custom keybinds */
+	
+    #if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
 	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
