@@ -3,15 +3,15 @@
 
 /* appearance */
 /* custom commands */
-static const char *audioctl[]            = { "/usr/bin/pavucontrol",              NULL };
-static const char *lockscrn[]            = { "/usr/local/bin/slock",              NULL };
-static const char *scrnshot[]            = { "/usr/local/bin/screenshotutil",     NULL };
+//static const char *audioctl[]            = { "/usr/bin/pavucontrol",              NULL };
+//static const char *lockscrn[]            = { "/usr/local/bin/slock",              NULL };
+//static const char *scrnshot[]            = { "/usr/local/bin/screenshotutil",     NULL };
 //static const char *brightup[]            = { "/usr/local/bin/backlightctl", "-u", NULL };
 //static const char *brightdown[]          = { "/usr/local/bin/backlightctl", "-d", NULL };
-static const char *volup[]               = { "/usr/local/bin/volumectl", "-u",    NULL };
-static const char *voldown[]             = { "/usr/local/bin/volumectl", "-d",    NULL };
-static const char *volmute[]             = { "/usr/local/bin/volumectl", "-m",    NULL };
-static const char *netmcmd[]             = { "alacritty", "-e", "nmtui",          NULL };
+//static const char *volup[]               = { "/usr/local/bin/volumectl", "-u",    NULL };
+//static const char *voldown[]             = { "/usr/local/bin/volumectl", "-d",    NULL };
+//static const char *volmute[]             = { "/usr/local/bin/volumectl", "-m",    NULL };
+//static const char *netmcmd[]             = { "alacritty", "-e", "nmtui",          NULL };
 //static const char *bluecmd[]             = { "alacritty", "-e", "bluetuith",      NULL };
 /* end custom commands */
 
@@ -176,45 +176,45 @@ static const char dmenufont[]            = "JetBrainsMono:size=9";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
-static char normfgcolor[]                = "#d8caac";
-static char normbgcolor[]                = "#2f383e";
-static char normbordercolor[]            = "#868d80";
-static char normfloatcolor[]             = "#db8fd9";
+static char normfgcolor[]                = "#ABB2BF";
+static char normbgcolor[]                = "#282C34";
+static char normbordercolor[]            = "#E5C07B";
+static char normfloatcolor[]             = "#C678DD";
 
-static char selfgcolor[]                 = "#2f383e";
-static char selbgcolor[]                 = "#a7c080";
-static char selbordercolor[]             = "#a7c080";
-static char selfloatcolor[]              = "#a7c080";
+static char selfgcolor[]                 = "#282C34";
+static char selbgcolor[]                 = "#ABB2BF";
+static char selbordercolor[]             = "#ABB2BF";
+static char selfloatcolor[]              = "#ABB2BF";
 
-static char titlenormfgcolor[]           = "#d8caac";
-static char titlenormbgcolor[]           = "#2f383e";
-static char titlenormbordercolor[]       = "#868d80";
-static char titlenormfloatcolor[]        = "#db8fd9";
+static char titlenormfgcolor[]           = "#ABB2BF";
+static char titlenormbgcolor[]           = "#282C34";
+static char titlenormbordercolor[]       = "#E5C07B";
+static char titlenormfloatcolor[]        = "#C678DD";
 
-static char titleselfgcolor[]            = "#2f383e";
-static char titleselbgcolor[]            = "#a7c080";
-static char titleselbordercolor[]        = "#a7c080";
-static char titleselfloatcolor[]         = "#a7c080";
+static char titleselfgcolor[]            = "#282C34";
+static char titleselbgcolor[]            = "#ABB2BF";
+static char titleselbordercolor[]        = "#ABB2BF";
+static char titleselfloatcolor[]         = "#ABB2BF";
 
-static char tagsnormfgcolor[]            = "#d8caac";
-static char tagsnormbgcolor[]            = "#2f383e";
-static char tagsnormbordercolor[]        = "#868d80";
-static char tagsnormfloatcolor[]         = "#db8fd9";
+static char tagsnormfgcolor[]            = "#ABB2BF";
+static char tagsnormbgcolor[]            = "#282C34";
+static char tagsnormbordercolor[]        = "#E5C07B";
+static char tagsnormfloatcolor[]         = "#C678DD";
 
-static char tagsselfgcolor[]             = "#2f383e";
-static char tagsselbgcolor[]             = "#a7c080";
-static char tagsselbordercolor[]         = "#a7c080";
-static char tagsselfloatcolor[]          = "#a7c080";
+static char tagsselfgcolor[]             = "#282C34";
+static char tagsselbgcolor[]             = "#ABB2BF";
+static char tagsselbordercolor[]         = "#ABB2BF";
+static char tagsselfloatcolor[]          = "#ABB2BF";
 
-static char hidnormfgcolor[]             = "#a7c080";
-static char hidselfgcolor[]              = "#227799";
-static char hidnormbgcolor[]             = "#2f383e";
-static char hidselbgcolor[]              = "#2f383e";
+static char hidnormfgcolor[]             = "#ABB2BF";
+static char hidselfgcolor[]              = "#98C379";
+static char hidnormbgcolor[]             = "#282C34";
+static char hidselbgcolor[]              = "#282C34";
 
-static char urgfgcolor[]                 = "#d8caac";
-static char urgbgcolor[]                 = "#2f383e";
-static char urgbordercolor[]             = "#ff0000";
-static char urgfloatcolor[]              = "#db8fd9";
+static char urgfgcolor[]                 = "#ABB2BF";
+static char urgbgcolor[]                 = "#282C34";
+static char urgbordercolor[]             = "#E06C75";
+static char urgfloatcolor[]              = "#C678DD";
 
 #if RENAMED_SCRATCHPADS_PATCH
 static char scratchselfgcolor[]          = "#FFF7D4";
@@ -913,16 +913,16 @@ static const Key on_empty_keys[] = {
 static const Key keys[] = {
 	/* modifier                     key            function                argument */
     /* custom keybinds */
-    { 0,                 XK_Print,                 spawn,                  {.v = scrnshot } },
+    //{ 0,                 XK_Print,                 spawn,                  {.v = scrnshot } },
     //{ 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = brightup } },
     //{ 0,                 XF86XK_MonBrightnessDown, spawn,                  {.v = brightdown } },
-    { 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
-    { 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
-    { 0,                 XF86XK_AudioRaiseVolume,  spawn,                  {.v = volup } },
-    { MODKEY | ShiftMask,           XK_a,          spawn,                  {.v = audioctl } },
-    { MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
+    //{ 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
+    //{ 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
+    //{ 0,                 XF86XK_AudioRaiseVolume,  spawn,                  {.v = volup } },
+    //{ MODKEY | ShiftMask,           XK_a,          spawn,                  {.v = audioctl } },
+    //{ MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
     //{ MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
-    { MODKEY | ShiftMask,           XK_l,          spawn,                  {.v = lockscrn } },
+    //{ MODKEY | ShiftMask,           XK_l,          spawn,                  {.v = lockscrn } },
     /* end custom keybinds */
 	
     #if KEYMODES_PATCH
