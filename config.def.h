@@ -170,51 +170,51 @@ static void (*bartabmonfns[])(Monitor *) = { NULL /* , customlayoutfn */ };
 #if BAR_PANGO_PATCH
 static const char font[]                 = "monospace 10";
 #else
-static const char *fonts[]               = { "JetBrainsMono:size=9" };
+static const char *fonts[]               = { "JetBrains Mono:size=9" };
 #endif // BAR_PANGO_PATCH
-static const char dmenufont[]            = "JetBrainsMono:size=9";
+static const char dmenufont[]            = "JetBrains Mono:size=9";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
-static char normfgcolor[]                = "#ABB2BF";
-static char normbgcolor[]                = "#282C34";
-static char normbordercolor[]            = "#E5C07B";
-static char normfloatcolor[]             = "#C678DD";
+static char normfgcolor[]                = "#ebdbb2";
+static char normbgcolor[]                = "#282828";
+static char normbordercolor[]            = "#282828";
+static char normfloatcolor[]             = "#282828";
 
-static char selfgcolor[]                 = "#282C34";
-static char selbgcolor[]                 = "#ABB2BF";
-static char selbordercolor[]             = "#ABB2BF";
-static char selfloatcolor[]              = "#ABB2BF";
+static char selfgcolor[]                 = "#eeeeee";
+static char selbgcolor[]                 = "#d79921";
+static char selbordercolor[]             = "#d65d0e";
+static char selfloatcolor[]              = "#689d6a";
 
-static char titlenormfgcolor[]           = "#ABB2BF";
-static char titlenormbgcolor[]           = "#282C34";
-static char titlenormbordercolor[]       = "#E5C07B";
-static char titlenormfloatcolor[]        = "#C678DD";
+static char titlenormfgcolor[]           = "#ebdbb2";
+static char titlenormbgcolor[]           = "#282828";
+static char titlenormbordercolor[]       = "#282828";
+static char titlenormfloatcolor[]        = "#282828";
 
-static char titleselfgcolor[]            = "#282C34";
-static char titleselbgcolor[]            = "#ABB2BF";
-static char titleselbordercolor[]        = "#ABB2BF";
-static char titleselfloatcolor[]         = "#ABB2BF";
+static char titleselfgcolor[]            = "#d79921";
+static char titleselbgcolor[]            = "#282828";
+static char titleselbordercolor[]        = "#282828";
+static char titleselfloatcolor[]         = "#282828";
 
-static char tagsnormfgcolor[]            = "#ABB2BF";
-static char tagsnormbgcolor[]            = "#282C34";
-static char tagsnormbordercolor[]        = "#E5C07B";
-static char tagsnormfloatcolor[]         = "#C678DD";
+static char tagsnormfgcolor[]            = "#ebdbb2";
+static char tagsnormbgcolor[]            = "#282828";
+static char tagsnormbordercolor[]        = "#282828";
+static char tagsnormfloatcolor[]         = "#282828";
 
-static char tagsselfgcolor[]             = "#282C34";
-static char tagsselbgcolor[]             = "#ABB2BF";
-static char tagsselbordercolor[]         = "#ABB2BF";
-static char tagsselfloatcolor[]          = "#ABB2BF";
+static char tagsselfgcolor[]             = "#282828";
+static char tagsselbgcolor[]             = "#d79921";
+static char tagsselbordercolor[]         = "#d79921";
+static char tagsselfloatcolor[]          = "#d79921";
 
-static char hidnormfgcolor[]             = "#ABB2BF";
-static char hidselfgcolor[]              = "#98C379";
-static char hidnormbgcolor[]             = "#282C34";
-static char hidselbgcolor[]              = "#282C34";
+static char hidnormfgcolor[]             = "#d79921";
+static char hidselfgcolor[]              = "#d65d0e";
+static char hidnormbgcolor[]             = "#282828";
+static char hidselbgcolor[]              = "#282828";
 
-static char urgfgcolor[]                 = "#ABB2BF";
-static char urgbgcolor[]                 = "#282C34";
-static char urgbordercolor[]             = "#E06C75";
-static char urgfloatcolor[]              = "#C678DD";
+static char urgfgcolor[]                 = "#ebdbb2";
+static char urgbgcolor[]                 = "#282828";
+static char urgbordercolor[]             = "#cc241d";
+static char urgfloatcolor[]              = "#db8fd9";
 
 #if RENAMED_SCRATCHPADS_PATCH
 static char scratchselfgcolor[]          = "#FFF7D4";
@@ -505,14 +505,12 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1      )
 	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1      )
 	RULE(.wintype = WTYPE "SPLASH",  .isfloating = 1      )
+    RULE(.class   = "Pavucontrol",   .isfloating = 1      )
 	RULE(.class   = "Gimp",          .tags       = 1 << 1 )
-	RULE(.class   = "Firefox",       .tags       = 1 << 7 )
-    RULE(.class   = "Nitrogen",      .tags       = 0      )
+	RULE(.class   = "firefox",       .tags       = 1 << 3 )
     RULE(.class   = "Alacritty",     .tags       = 0      )
     RULE(.class   = "Nemo",          .tags       = 1 << 2 )
     RULE(.class   = "Code",          .tags       = 1 << 1 )
-    RULE(.class   = "Pavucontrol",   .tags       = 0      )
-    RULE(.class   = "firefox",       .tags       = 1 << 3 )
     RULE(.class   = "Spotify",       .tags       = 1 << 6 )
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
@@ -913,15 +911,15 @@ static const Key on_empty_keys[] = {
 static const Key keys[] = {
 	/* modifier                     key            function                argument */
     /* custom keybinds */
-    //{ 0,                 XK_Print,                 spawn,                  {.v = scrnshot } },
+    { 0,                 XK_Print,                 spawn,                  {.v = scrnshot } },
     //{ 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = brightup } },
     //{ 0,                 XF86XK_MonBrightnessDown, spawn,                  {.v = brightdown } },
+    //{ MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
     //{ 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
     //{ 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
     //{ 0,                 XF86XK_AudioRaiseVolume,  spawn,                  {.v = volup } },
     //{ MODKEY | ShiftMask,           XK_a,          spawn,                  {.v = audioctl } },
     //{ MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
-    //{ MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
     //{ MODKEY | ShiftMask,           XK_l,          spawn,                  {.v = lockscrn } },
     /* end custom keybinds */
 	
