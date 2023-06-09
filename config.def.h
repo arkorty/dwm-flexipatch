@@ -911,7 +911,7 @@ static const Key on_empty_keys[] = {
 static const Key keys[] = {
 	/* modifier                     key            function                argument */
     /* custom keybinds */
-    { 0,                 XK_Print,                 spawn,                  {.v = scrnshot } },
+    //{ 0,                 XK_Print,                 spawn,                  {.v = scrnshot } },
     //{ 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = brightup } },
     //{ 0,                 XF86XK_MonBrightnessDown, spawn,                  {.v = brightdown } },
     //{ MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
