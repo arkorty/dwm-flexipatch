@@ -512,6 +512,7 @@ static const Rule rules[] = {
     RULE(.class   = "Nemo",          .tags       = 1 << 2 )
     RULE(.class   = "Code",          .tags       = 1 << 1 )
     RULE(.class   = "Spotify",       .tags       = 1 << 6 )
+    RULE(.class   = "discord",       .tags       = 1 << 5 )
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
 	#elif SCRATCHPADS_PATCH
