@@ -3,16 +3,16 @@
 
 /* appearance */
 /* custom commands */
-//static const char *audioctl[]            = { "/usr/bin/pavucontrol",              NULL };
-//static const char *lockscrn[]            = { "/usr/local/bin/slock",              NULL };
-//static const char *scrnshot[]            = { "/usr/local/bin/screenshotutil",     NULL };
-//static const char *brightup[]            = { "/usr/local/bin/backlightctl", "-u", NULL };
-//static const char *brightdown[]          = { "/usr/local/bin/backlightctl", "-d", NULL };
-//static const char *volup[]               = { "/usr/local/bin/volumectl", "-u",    NULL };
-//static const char *voldown[]             = { "/usr/local/bin/volumectl", "-d",    NULL };
-//static const char *volmute[]             = { "/usr/local/bin/volumectl", "-m",    NULL };
-//static const char *netmcmd[]             = { "alacritty", "-e", "nmtui",          NULL };
-//static const char *bluecmd[]             = { "alacritty", "-e", "bluetuith",      NULL };
+//static const char *audioctl[]          = { "pavucontrol",                   NULL };
+//static const char *lockscrn[]          = { "slock",                         NULL };
+//static const char *scrnshot[]          = { "screenshotutil",                NULL };
+//static const char *brightup[]          = { "backlightctl", "-u",            NULL };
+//static const char *brightdown[]        = { "backlightctl", "-d",            NULL };
+//static const char *volup[]             = { "volumectl", "-u",               NULL };
+//static const char *voldown[]           = { "volumectl", "-d",               NULL };
+//static const char *volmute[]           = { "volumectl", "-m",               NULL };
+//static const char *netmcmd[]           = { "alacritty", "-e", "nmtui",      NULL };
+//static const char *bluecmd[]           = { "alacritty", "-e", "bluetuith",  NULL };
 /* end custom commands */
 
 #if ROUNDED_CORNERS_PATCH
@@ -26,7 +26,7 @@ static const unsigned int snap           = 32;  /* snap pixel */
 static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
 #endif // SWALLOW_PATCH
 #if BAR_TAGPREVIEW_PATCH
-static const int scalepreview            = 4;        /* Tag preview scaling */
+static const int scalepreview            = 4;   /* Tag preview scaling */
 #endif // BAR_TAGPREVIEW_PATCH
 #if NO_MOD_BUTTONS_PATCH
 static int nomodbuttons                  = 1;   /* allow client mouse button bindings that have no modifier */
