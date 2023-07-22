@@ -484,7 +484,7 @@ struct Monitor {
 	int gappov;           /* vertical outer gaps */
 	#endif // VANITYGAPS_PATCH
 	#if SETBORDERPX_PATCH
-	unsigned int borderpx;
+	int borderpx;
 	#endif // SETBORDERPX_PATCH
 	unsigned int seltags;
 	unsigned int sellt;
@@ -568,6 +568,9 @@ typedef struct {
 	#if RENAMED_SCRATCHPADS_PATCH
 	const char scratchkey;
 	#endif // RENAMED_SCRATCHPADS_PATCH
+	#if UNMANAGED_PATCH
+	int unmanaged;
+	#endif // UNMANAGED_PATCH
 	#if XKB_PATCH
 	int xkb_layout;
 	#endif // XKB_PATCH
@@ -775,6 +778,9 @@ static int xkbEventType = 0;
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh;               /* bar geometry */
+#if UNMANAGED_PATCH
+static int unmanaged = 0;    /* whether the window manager should manage the new window or not */
+#endif // UNMANAGED_PATCH
 static int lrpad;            /* sum of left and right padding for text */
 /* Some clients (e.g. alacritty) helpfully send configure requests with a new size or position
  * when they detect that they have been moved to another monitor. This can cause visual glitches
@@ -932,6 +938,9 @@ applyrules(Client *c)
 				c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
 			}
 			#endif // SCRATCHPADS_PATCH
+			#if UNMANAGED_PATCH
+			unmanaged = r->unmanaged;
+			#endif // UNMANAGED_PATCH
 			for (m = mons; m && m->num != r->monitor; m = m->next);
 			if (m)
 				c->mon = m;
@@ -1489,8 +1498,8 @@ configurenotify(XEvent *e)
 				createpreview(m);
 				#endif // BAR_TAGPREVIEW_PATCH
 			}
-			focus(NULL);
 			arrange(NULL);
+			focus(NULL);
 		}
 	}
 }
@@ -1676,7 +1685,7 @@ createmon(void)
 		bar->showbar = 1;
 		bar->external = 0;
 		#if BAR_BORDER_PATCH
-		bar->borderpx = borderpx;
+		bar->borderpx = (barborderpx ? barborderpx : borderpx);
 		#else
 		bar->borderpx = 0;
 		#endif // BAR_BORDER_PATCH
@@ -2037,6 +2046,10 @@ expose(XEvent *e)
 void
 focus(Client *c)
 {
+	#if FOCUSFOLLOWMOUSE_PATCH
+	if (!c || !ISVISIBLE(c))
+		c = getpointerclient();
+	#endif // FOCUSFOLLOWMOUSE_PATCH
 	if (!c || !ISVISIBLE(c))
 		for (c = selmon->stack; c && !ISVISIBLE(c); c = c->snext);
 	if (selmon->sel && selmon->sel != c)
@@ -2497,6 +2510,25 @@ manage(Window w, XWindowAttributes *wa)
 			c->mon = term->mon;
 		#endif // SWALLOW_PATCH
 	}
+
+	#if UNMANAGED_PATCH
+	if (unmanaged) {
+		XMapWindow(dpy, c->win);
+		if (unmanaged == 1)
+			XRaiseWindow(dpy, c->win);
+		else if (unmanaged == 2)
+			XLowerWindow(dpy, c->win);
+
+		updatewmhints(c);
+		if (!c->neverfocus)
+			XSetInputFocus(dpy, c->win, RevertToPointerRoot, CurrentTime);
+		sendevent(c, wmatom[WMTakeFocus]);
+
+		free(c);
+		unmanaged = 0;
+		return;
+	}
+	#endif // UNMANAGED_PATCH
 
 	if (c->x + WIDTH(c) > c->mon->wx + c->mon->ww)
 		c->x = c->mon->wx + c->mon->ww - WIDTH(c);
@@ -3347,11 +3379,12 @@ sendmon(Client *c, Monitor *m)
 	if (hadfocus) {
 		focus(c);
 		restack(m);
-	} else
+	} else {
 		focus(NULL);
+	}
 	#else
-	focus(NULL);
 	arrange(NULL);
+	focus(NULL);
 	#endif // EXRESIZE_PATCH / SENDMON_KEEPFOCUS_PATCH
 	#if SWITCHTAG_PATCH
 	if (c->switchtag)
@@ -4074,6 +4107,7 @@ tag(const Arg *arg)
 		if (selmon->sel->switchtag)
 			selmon->sel->switchtag = 0;
 		#endif // SWITCHTAG_PATCH
+		arrange(selmon);
 		focus(NULL);
 		#if SWAPFOCUS_PATCH && PERTAG_PATCH
 		selmon->pertag->prevclient[selmon->pertag->curtag] = NULL;
@@ -4081,7 +4115,6 @@ tag(const Arg *arg)
 			if (tagmask & 1)
 				selmon->pertag->prevclient[tagindex] = NULL;
 		#endif // SWAPFOCUS_PATCH
-		arrange(selmon);
 		#if VIEWONTAG_PATCH
 		if ((arg->ui & TAGMASK) != selmon->tagset[selmon->seltags])
 			view(arg);
@@ -4213,13 +4246,13 @@ toggletag(const Arg *arg)
 	newtags = selmon->sel->tags ^ (arg->ui & TAGMASK);
 	if (newtags) {
 		selmon->sel->tags = newtags;
+		arrange(selmon);
 		focus(NULL);
 		#if SWAPFOCUS_PATCH && PERTAG_PATCH
 		for (tagmask = arg->ui & TAGMASK, tagindex = 1; tagmask!=0; tagmask >>= 1, tagindex++)
 			if (tagmask & 1)
 				selmon->pertag->prevclient[tagindex] = NULL;
 		#endif // SWAPFOCUS_PATCH
-		arrange(selmon);
 	}
 	#if BAR_EWMHTAGS_PATCH
 	updatecurrentdesktop();
@@ -4306,8 +4339,8 @@ toggleview(const Arg *arg)
 		#endif // PERTAGBAR_PATCH
 		#endif // PERTAG_PATCH
 		#if !TAGSYNC_PATCH
-		focus(NULL);
 		arrange(selmon);
+		focus(NULL);
 		#endif // TAGSYNC_PATCH
 	#if !EMPTYVIEW_PATCH
 	}
@@ -4318,8 +4351,8 @@ toggleview(const Arg *arg)
 	#if !EMPTYVIEW_PATCH
 	if (newtagset) {
 	#endif // EMPTYVIEW_PATCH
-		focus(NULL);
 		arrange(NULL);
+		focus(NULL);
 	#if !EMPTYVIEW_PATCH
 	}
 	#endif // EMPTYVIEW_PATCH
@@ -4456,9 +4489,9 @@ unmanage(Client *c, int destroyed)
 	if (s)
 		return;
 	#endif // SWALLOW_PATCH
+	arrange(m);
 	focus(NULL);
 	updateclientlist();
-	arrange(m);
 	#if SWITCHTAG_PATCH
 	if (switchtag && ((switchtag & TAGMASK) != selmon->tagset[selmon->seltags]))
 		view(&((Arg) { .ui = switchtag }));
@@ -4953,12 +4986,12 @@ view(const Arg *arg)
 	}
 	selmon = origselmon;
 	#endif // TAGSYNC_PATCH
-	focus(NULL);
 	#if TAGSYNC_PATCH
 	arrange(NULL);
 	#else
 	arrange(selmon);
 	#endif // TAGSYNC_PATCH
+	focus(NULL);
 	#if BAR_EWMHTAGS_PATCH
 	updatecurrentdesktop();
 	#endif // BAR_EWMHTAGS_PATCH
