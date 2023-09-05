@@ -14,6 +14,11 @@
  * Bar modules
  */
 
+/*
+ * This patch enables bluetooth and backlight shortcut keys.
+ */
+#define BACKLIGHT_AND_BLUETOOTH 0
+
 /* Enhanced taskbar that shows the titles of all visible windows in the status bar
  * and allows focus / hiding / unhiding of windows by clicking on the status bar.
  * Awesomebar takes precedence over fancybar.

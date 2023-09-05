@@ -2,19 +2,6 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-/* custom commands */
-//static const char *audioctl[]          = { "pavucontrol",                   NULL };
-//static const char *lockscrn[]          = { "slock",                         NULL };
-//static const char *scrnshot[]          = { "screenshotutil",                NULL };
-//static const char *brightup[]          = { "backlightctl", "-u",            NULL };
-//static const char *brightdown[]        = { "backlightctl", "-d",            NULL };
-//static const char *volup[]             = { "volumectl", "-u",               NULL };
-//static const char *voldown[]           = { "volumectl", "-d",               NULL };
-//static const char *volmute[]           = { "volumectl", "-m",               NULL };
-//static const char *netmcmd[]           = { "alacritty", "-e", "nmtui",      NULL };
-//static const char *bluecmd[]           = { "alacritty", "-e", "bluetuith",  NULL };
-/* end custom commands */
-
 #if ROUNDED_CORNERS_PATCH
 static const unsigned int borderpx       = 0;   /* border pixel of windows */
 static const int corner_radius           = 10;
@@ -188,16 +175,16 @@ static char normbordercolor[]            = "#282828";
 static char normfloatcolor[]             = "#282828";
 
 static char selfgcolor[]                 = "#eeeeee";
-static char selbgcolor[]                 = "#d79921";
-static char selbordercolor[]             = "#d65d0e";
-static char selfloatcolor[]              = "#689d6a";
+static char selbgcolor[]                 = "#ebdbb2";
+static char selbordercolor[]             = "#ebdbb2";
+static char selfloatcolor[]              = "#458588";
 
 static char titlenormfgcolor[]           = "#ebdbb2";
 static char titlenormbgcolor[]           = "#282828";
 static char titlenormbordercolor[]       = "#282828";
 static char titlenormfloatcolor[]        = "#282828";
 
-static char titleselfgcolor[]            = "#d79921";
+static char titleselfgcolor[]            = "#ebdbb2";
 static char titleselbgcolor[]            = "#282828";
 static char titleselbordercolor[]        = "#282828";
 static char titleselfloatcolor[]         = "#282828";
@@ -208,11 +195,11 @@ static char tagsnormbordercolor[]        = "#282828";
 static char tagsnormfloatcolor[]         = "#282828";
 
 static char tagsselfgcolor[]             = "#282828";
-static char tagsselbgcolor[]             = "#d79921";
-static char tagsselbordercolor[]         = "#d79921";
-static char tagsselfloatcolor[]          = "#d79921";
+static char tagsselbgcolor[]             = "#ebdbb2";
+static char tagsselbordercolor[]         = "#ebdbb2";
+static char tagsselfloatcolor[]          = "#ebdbb2";
 
-static char hidnormfgcolor[]             = "#d79921";
+static char hidnormfgcolor[]             = "#ebdbb2";
 static char hidselfgcolor[]              = "#d65d0e";
 static char hidnormbgcolor[]             = "#282828";
 static char hidselbgcolor[]              = "#282828";
@@ -507,18 +494,19 @@ static const Rule rules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	RULE(.wintype = WTYPE "DIALOG",  .isfloating = 1      )
-	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1      )
-	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1      )
-	RULE(.wintype = WTYPE "SPLASH",  .isfloating = 1      )
-    RULE(.class   = "Pavucontrol",   .isfloating = 1      )
-	RULE(.class   = "Gimp",          .tags       = 1 << 1 )
-	RULE(.class   = "firefox",       .tags       = 1 << 3 )
-    RULE(.class   = "Alacritty",     .tags       = 0      )
-    RULE(.class   = "Nemo",          .tags       = 1 << 2 )
-    RULE(.class   = "Code",          .tags       = 1 << 1 )
-    RULE(.class   = "Spotify",       .tags       = 1 << 6 )
-    RULE(.class   = "discord",       .tags       = 1 << 5 )
+    RULE(.wintype = WTYPE "DIALOG", .isfloating = 1 )
+    RULE(.wintype = WTYPE "UTILITY", .isfloating = 1 )
+    RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1 )
+    RULE(.wintype = WTYPE "SPLASH", .isfloating = 1 )
+    RULE(.class   = "Pavucontrol", .isfloating = 1 )
+    RULE(.class   = "Gimp", .tags = 1 << 1, .isfloating = 1 )
+    RULE(.class   = "firefox", .tags = 1 << 3 )
+    RULE(.class   = "mpv", .tags = 1 << 6 )
+    RULE(.class   = "Alacritty", .tags = 0 )
+    RULE(.class   = "Nemo", .tags = 1 << 2 )
+    RULE(.class   = "Code", .tags = 1 << 1 )
+    RULE(.class   = "Spotify", .tags = 1 << 6 )
+    RULE(.class   = "discord", .tags = 1 << 5 )
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
 	#elif SCRATCHPADS_PATCH
@@ -874,7 +862,19 @@ static const char *xkb_layouts[]  = {
 #if !NODMENU_PATCH
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 #endif // NODMENU_PATCH
-static const char *dmenucmd[] = {
+static const char *audioctl[]   = { "pavucontrol", NULL };
+static const char *lockscrn[]   = { "slock", NULL };
+static const char *scrnshot[]   = { "screenshot", NULL };
+static const char *volup[]      = { "volume", "-i", NULL };
+static const char *voldown[]    = { "volume", "-d", NULL };
+static const char *volmute[]    = { "volume", "-m", NULL };
+static const char *netmcmd[]    = { "alacritty", "-e", "nmtui", NULL };
+#ifdef BACKLIGHT_AND_BLUETOOTH
+static const char *bluecmd[]    = { "alacritty", "-e", "bluetuith", NULL };
+static const char *brightup[]   = { "backlight", "-i", NULL };
+static const char *brightdown[] = { "backlight", "-d", NULL };
+#endif
+static const char *dmenucmd[]   = {
 	"dmenu_run",
 	#if !NODMENU_PATCH
 	"-m", dmenumon,
@@ -889,7 +889,7 @@ static const char *dmenucmd[] = {
 	#endif // BAR_DMENUMATCHTOP_PATCH
 	NULL
 };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]    = { "alacritty", NULL };
 
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
@@ -917,18 +917,18 @@ static const Key on_empty_keys[] = {
 
 static const Key keys[] = {
 	/* modifier                     key            function                argument */
-    /* custom keybinds */
-    //{ 0,                 XK_Print,                 spawn,                  {.v = scrnshot } },
-    //{ 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = brightup } },
-    //{ 0,                 XF86XK_MonBrightnessDown, spawn,                  {.v = brightdown } },
-    //{ MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
-    //{ 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
-    //{ 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
-    //{ 0,                 XF86XK_AudioRaiseVolume,  spawn,                  {.v = volup } },
-    //{ MODKEY | ShiftMask,           XK_a,          spawn,                  {.v = audioctl } },
-    //{ MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
-    //{ MODKEY | ShiftMask,           XK_l,          spawn,                  {.v = lockscrn } },
-    /* end custom keybinds */
+    { MODKEY | ShiftMask,           XK_a,          spawn,                  {.v = audioctl } },
+    { MODKEY | ShiftMask,           XK_l,          spawn,                  {.v = lockscrn } },
+    { 0,                            XK_Print,      spawn,                  {.v = scrnshot } },
+    { 0,                 XF86XK_AudioRaiseVolume,  spawn,                  {.v = volup } },
+    { 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
+    { 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
+    { MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
+#ifdef BACKLIGHT_AND_BLUETOOTH
+    { MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
+    { 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = brightup } },
+    { 0,                 XF86XK_MonBrightnessDown, spawn,                  {.v = brightdown } },
+#endif
 	
     #if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
