@@ -15,7 +15,8 @@
  */
 
 /*
- * This patch enables bluetooth and backlight shortcut keys.
+ * This patch enables bluetooth command and shortcut key. It also enables display
+ * backlight modulating shortcut keys.
  */
 #define BACKLIGHT_AND_BLUETOOTH 0
 
