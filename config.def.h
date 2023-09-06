@@ -174,7 +174,7 @@ static char normbgcolor[]                = "#282828";
 static char normbordercolor[]            = "#282828";
 static char normfloatcolor[]             = "#282828";
 
-static char selfgcolor[]                 = "#eeeeee";
+static char selfgcolor[]                 = "#282828";
 static char selbgcolor[]                 = "#ebdbb2";
 static char selbordercolor[]             = "#ebdbb2";
 static char selfloatcolor[]              = "#458588";
@@ -451,7 +451,7 @@ static char *tagicons[][NUMTAGS] =
 #endif // NAMETAG_PATCH
 {
 	//[DEFAULT_TAGS]      = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
-    [DEFAULT_TAGS]        = {"term", "edit",  "file", "www", "docs", "comm", "media", "misc", "misc"},
+    [DEFAULT_TAGS]        = {"term", "edit", "www", "docs", "comm", "media", "misc", "misc", "misc" },
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
 	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
 };
@@ -494,19 +494,20 @@ static const Rule rules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-    RULE(.wintype = WTYPE "DIALOG", .isfloating = 1 )
-    RULE(.wintype = WTYPE "UTILITY", .isfloating = 1 )
-    RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1 )
-    RULE(.wintype = WTYPE "SPLASH", .isfloating = 1 )
-    RULE(.class   = "Pavucontrol", .isfloating = 1 )
-    RULE(.class   = "Gimp", .tags = 1 << 1, .isfloating = 1 )
-    RULE(.class   = "firefox", .tags = 1 << 3 )
-    RULE(.class   = "mpv", .tags = 1 << 6 )
-    RULE(.class   = "Alacritty", .tags = 0 )
-    RULE(.class   = "Nemo", .tags = 1 << 2 )
-    RULE(.class   = "Code", .tags = 1 << 1 )
-    RULE(.class   = "Spotify", .tags = 1 << 6 )
-    RULE(.class   = "discord", .tags = 1 << 5 )
+    RULE(.wintype = WTYPE "DIALOG",   .tags = 0 << 0,  .isfloating = 1 )
+    RULE(.wintype = WTYPE "UTILITY",  .tags = 0 << 0,  .isfloating = 1 )
+    RULE(.wintype = WTYPE "TOOLBAR",  .tags = 0 << 0,  .isfloating = 1 )
+    RULE(.wintype = WTYPE "SPLASH",   .tags = 0 << 0,  .isfloating = 1 )
+    RULE(.class   = "Pavucontrol",    .tags = 0 << 0,  .isfloating = 1 )
+    RULE(.class   = "Gimp",           .tags = 1 << 1,  .isfloating = 1 )
+    RULE(.class   = "firefox",        .tags = 1 << 2,  .isfloating = 0 )
+    RULE(.class   = "mpv",            .tags = 1 << 5,  .isfloating = 0 )
+    RULE(.class   = "Alacritty",      .tags = 0 << 0,  .isfloating = 0 )
+    RULE(.class   = "Nemo",           .tags = 1 << 1,  .isfloating = 0 )
+    RULE(.class   = "Code",           .tags = 1 << 1,  .isfloating = 0 )
+    RULE(.class   = "Spotify",        .tags = 1 << 5,  .isfloating = 0 )
+    RULE(.class   = "discord",        .tags = 1 << 4,  .isfloating = 0 )
+    RULE(.class   = "qBittorrent",    .tags = 1 << 6,  .isfloating = 0 )
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
 	#elif SCRATCHPADS_PATCH
