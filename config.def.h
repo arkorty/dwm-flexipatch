@@ -494,15 +494,15 @@ static const Rule rules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-    RULE(.wintype = WTYPE "DIALOG",   .tags = 0 << 0,  .isfloating = 1 )
-    RULE(.wintype = WTYPE "UTILITY",  .tags = 0 << 0,  .isfloating = 1 )
-    RULE(.wintype = WTYPE "TOOLBAR",  .tags = 0 << 0,  .isfloating = 1 )
-    RULE(.wintype = WTYPE "SPLASH",   .tags = 0 << 0,  .isfloating = 1 )
-    RULE(.class   = "Pavucontrol",    .tags = 0 << 0,  .isfloating = 1 )
+    RULE(.wintype = WTYPE "DIALOG",   .tags = 0,       .isfloating = 1 )
+    RULE(.wintype = WTYPE "UTILITY",  .tags = 0,       .isfloating = 1 )
+    RULE(.wintype = WTYPE "TOOLBAR",  .tags = 0,       .isfloating = 1 )
+    RULE(.wintype = WTYPE "SPLASH",   .tags = 0,       .isfloating = 1 )
+    RULE(.class   = "Pavucontrol",    .tags = 0,       .isfloating = 1 )
+    RULE(.class   = "Galculator",     .tags = 0,       .isfloating = 1 )
     RULE(.class   = "Gimp",           .tags = 1 << 1,  .isfloating = 1 )
     RULE(.class   = "firefox",        .tags = 1 << 3,  .isfloating = 0 )
     RULE(.class   = "mpv",            .tags = 1 << 5,  .isfloating = 0 )
-    RULE(.class   = "Alacritty",      .tags = 0 << 0,  .isfloating = 0 )
     RULE(.class   = "Nemo",           .tags = 1 << 2,  .isfloating = 0 )
     RULE(.class   = "Code",           .tags = 1 << 1,  .isfloating = 0 )
     RULE(.class   = "Spotify",        .tags = 1 << 6,  .isfloating = 0 )
