@@ -870,6 +870,7 @@ static const char *volup[]      = { "volume", "-i", NULL };
 static const char *voldown[]    = { "volume", "-d", NULL };
 static const char *volmute[]    = { "volume", "-m", NULL };
 static const char *netmcmd[]    = { "alacritty", "-e", "nmtui", NULL };
+static const char *webbcmd[]    = { "firefox", NULL };
 #ifdef BACKLIGHT_AND_BLUETOOTH
 static const char *bluecmd[]    = { "alacritty", "-e", "bluetuith", NULL };
 static const char *brightup[]   = { "backlight", "-i", NULL };
@@ -925,6 +926,7 @@ static const Key keys[] = {
     { 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
     { 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
     { MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
+    { MODKEY | ShiftMask,           XK_i,          spawn,                  {.v = webbcmd } },
 #ifdef BACKLIGHT_AND_BLUETOOTH
     { MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
     { 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = brightup } },
