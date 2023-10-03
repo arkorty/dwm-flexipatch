@@ -679,9 +679,7 @@ static void killclient(const Arg *arg);
 static void manage(Window w, XWindowAttributes *wa);
 static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
-#if !FOCUSONCLICK_PATCH
 static void motionnotify(XEvent *e);
-#endif // FOCUSONCLICK_PATCH
 static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
 #if !ZOOMSWAP_PATCH || TAGINTOSTACK_ALLMASTER_PATCH || TAGINTOSTACK_ONEMASTER_PATCH
@@ -817,9 +815,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	#endif // COMBO_PATCH / BAR_HOLDBAR_PATCH
 	[MappingNotify] = mappingnotify,
 	[MapRequest] = maprequest,
-	#if !FOCUSONCLICK_PATCH
 	[MotionNotify] = motionnotify,
-	#endif // FOCUSONCLICK_PATCH
 	[PropertyNotify] = propertynotify,
 	#if BAR_SYSTRAY_PATCH
 	[ResizeRequest] = resizerequest,
@@ -2522,7 +2518,11 @@ manage(Window w, XWindowAttributes *wa)
 		updatewmhints(c);
 		if (!c->neverfocus)
 			XSetInputFocus(dpy, c->win, RevertToPointerRoot, CurrentTime);
+		#if BAR_SYSTRAY_PATCH
+		sendevent(c->win, wmatom[WMTakeFocus], NoEventMask, wmatom[WMTakeFocus], CurrentTime, 0, 0, 0);
+		#else
 		sendevent(c, wmatom[WMTakeFocus]);
+		#endif // BAR_SYSTRAY_PATCH
 
 		free(c);
 		unmanaged = 0;
@@ -2698,12 +2698,13 @@ maprequest(XEvent *e)
 		manage(ev->window, &wa);
 }
 
-#if !FOCUSONCLICK_PATCH
 void
 motionnotify(XEvent *e)
 {
+	#if !FOCUSONCLICK_PATCH
 	static Monitor *mon = NULL;
 	Monitor *m;
+	#endif // FOCUSONCLICK_PATCH
 	Bar *bar;
 	#if LOSEFULLSCREEN_PATCH
 	Client *sel;
@@ -2720,6 +2721,7 @@ motionnotify(XEvent *e)
 		hidetagpreview(selmon);
 	#endif // BAR_TAGPREVIEW_PATCH
 
+	#if !FOCUSONCLICK_PATCH
 	if (ev->window != root)
 		return;
 	if ((m = recttomon(ev->x_root, ev->y_root, 1, 1)) != mon && mon) {
@@ -2734,8 +2736,8 @@ motionnotify(XEvent *e)
 		focus(NULL);
 	}
 	mon = m;
+	#endif // FOCUSONCLICK_PATCH
 }
-#endif // FOCUSONCLICK_PATCH
 
 void
 movemouse(const Arg *arg)
