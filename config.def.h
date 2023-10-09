@@ -451,7 +451,7 @@ static char *tagicons[][NUMTAGS] =
 #endif // NAMETAG_PATCH
 {
 	//[DEFAULT_TAGS]      = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
-  [DEFAULT_TAGS]        = { "term", "edit", "file", "www", "comm", "video", "music", "proc", "misc" },
+  [DEFAULT_TAGS]        = { "term", "code", "www", "edit", "file", "comm", "media", "proc", "misc" },
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
 	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
 };
@@ -500,13 +500,13 @@ static const Rule rules[] = {
     RULE(.wintype = WTYPE "SPLASH",   .tags = 0,       .isfloating = 1 )
     RULE(.class   = "Pavucontrol",    .tags = 0,       .isfloating = 1 )
     RULE(.class   = "Galculator",     .tags = 0,       .isfloating = 1 )
-    RULE(.class   = "Gimp",           .tags = 1 << 1,  .isfloating = 1 )
-    RULE(.class   = "firefox",        .tags = 1 << 3,  .isfloating = 0 )
-    RULE(.class   = "mpv",            .tags = 1 << 5,  .isfloating = 0 )
-    RULE(.class   = "Nemo",           .tags = 1 << 2,  .isfloating = 0 )
+    RULE(.class   = "Gimp",           .tags = 1 << 3,  .isfloating = 1 )
+    RULE(.class   = "firefox",        .tags = 1 << 2,  .isfloating = 0 )
+    RULE(.class   = "mpv",            .tags = 1 << 6,  .isfloating = 0 )
+    RULE(.class   = "Nemo",           .tags = 1 << 4,  .isfloating = 0 )
     RULE(.class   = "Code",           .tags = 1 << 1,  .isfloating = 0 )
     RULE(.class   = "Spotify",        .tags = 1 << 6,  .isfloating = 0 )
-    RULE(.class   = "discord",        .tags = 1 << 4,  .isfloating = 0 )
+    RULE(.class   = "discord",        .tags = 1 << 5,  .isfloating = 0 )
     RULE(.class   = "qBittorrent",    .tags = 1 << 7,  .isfloating = 0 )
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
