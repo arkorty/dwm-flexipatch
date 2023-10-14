@@ -494,20 +494,21 @@ static const Rule rules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-    RULE(.wintype = WTYPE "DIALOG",   .tags = 0,       .isfloating = 1 )
-    RULE(.wintype = WTYPE "UTILITY",  .tags = 0,       .isfloating = 1 )
-    RULE(.wintype = WTYPE "TOOLBAR",  .tags = 0,       .isfloating = 1 )
-    RULE(.wintype = WTYPE "SPLASH",   .tags = 0,       .isfloating = 1 )
-    RULE(.class   = "Pavucontrol",    .tags = 0,       .isfloating = 1 )
-    RULE(.class   = "Galculator",     .tags = 0,       .isfloating = 1 )
-    RULE(.class   = "Gimp",           .tags = 1 << 3,  .isfloating = 1 )
-    RULE(.class   = "firefox",        .tags = 1 << 2,  .isfloating = 0 )
-    RULE(.class   = "mpv",            .tags = 1 << 6,  .isfloating = 0 )
-    RULE(.class   = "Nemo",           .tags = 1 << 4,  .isfloating = 0 )
-    RULE(.class   = "Code",           .tags = 1 << 1,  .isfloating = 0 )
-    RULE(.class   = "Spotify",        .tags = 1 << 6,  .isfloating = 0 )
-    RULE(.class   = "discord",        .tags = 1 << 5,  .isfloating = 0 )
-    RULE(.class   = "qBittorrent",    .tags = 1 << 7,  .isfloating = 0 )
+    RULE(.wintype = WTYPE "DIALOG",     .tags = 0,       .isfloating = 1 )
+    RULE(.wintype = WTYPE "UTILITY",    .tags = 0,       .isfloating = 1 )
+    RULE(.wintype = WTYPE "TOOLBAR",    .tags = 0,       .isfloating = 1 )
+    RULE(.wintype = WTYPE "SPLASH",     .tags = 0,       .isfloating = 1 )
+    RULE(.class   = "Pavucontrol",      .tags = 0,       .isfloating = 1 )
+    RULE(.class   = "Galculator",       .tags = 0,       .isfloating = 1 )
+    RULE(.class   = "Gimp",             .tags = 1 << 3,  .isfloating = 1 )
+    RULE(.class   = "firefox",          .tags = 1 << 2,  .isfloating = 0 )
+    RULE(.class   = "mpv",              .tags = 1 << 6,  .isfloating = 0 )
+    RULE(.class   = "Nemo",             .tags = 1 << 4,  .isfloating = 0 )
+    RULE(.class   = "Code",             .tags = 1 << 1,  .isfloating = 0 )
+    RULE(.class   = "Spotify",          .tags = 1 << 6,  .isfloating = 0 )
+    RULE(.class   = "discord",          .tags = 1 << 5,  .isfloating = 0 )
+    RULE(.class   = "TelegramDesktop",  .tags = 1 << 5,  .isfloating = 0 )
+    RULE(.class   = "qBittorrent",      .tags = 1 << 7,  .isfloating = 0 )
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
 	#elif SCRATCHPADS_PATCH
@@ -870,7 +871,6 @@ static const char *volup[]      = { "volume", "-i", NULL };
 static const char *voldown[]    = { "volume", "-d", NULL };
 static const char *volmute[]    = { "volume", "-m", NULL };
 static const char *netmcmd[]    = { "alacritty", "-e", "nmtui", NULL };
-static const char *webbcmd[]    = { "firefox", NULL };
 #ifdef BACKLIGHT_AND_BLUETOOTH
 static const char *bluecmd[]    = { "alacritty", "-e", "bluetuith", NULL };
 static const char *brightup[]   = { "backlight", "-i", NULL };
@@ -926,7 +926,6 @@ static const Key keys[] = {
     { 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
     { 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
     { MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
-    { MODKEY | ShiftMask,           XK_i,          spawn,                  {.v = webbcmd } },
 #ifdef BACKLIGHT_AND_BLUETOOTH
     { MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
     { 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = brightup } },
