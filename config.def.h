@@ -172,7 +172,7 @@ static char c000000[]                    = "#000000"; // placeholder value
 static char normfgcolor[]                = "#bbbbbb";
 static char normbgcolor[]                = "#222222";
 static char normbordercolor[]            = "#444444";
-static char normfloatcolor[]             = "#db8fd9";
+static char normfloatcolor[]             = "#444444";
 
 static char selfgcolor[]                 = "#eeeeee";
 static char selbgcolor[]                 = "#005577";
@@ -866,7 +866,7 @@ static const char *xkb_layouts[]  = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 #endif // NODMENU_PATCH
 static const char *audioctl[]   = { "pavucontrol", NULL };
-static const char *lockscrn[]   = { "slock", NULL };
+static const char *lockscrn[]   = { "betterlockscreen", "--lock", "dim", NULL };
 static const char *scrnshot[]   = { "screenshot", NULL };
 static const char *volup[]      = { "volume", "-i", NULL };
 static const char *voldown[]    = { "volume", "-d", NULL };
