@@ -501,6 +501,7 @@ static const Rule rules[] = {
   RULE(.class   = "Pavucontrol",      .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Galculator",       .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Lxappearance",     .tags = 0,       .isfloating = 1 )
+  RULE(.class   = "Localsend",        .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Gimp",             .tags = 1 << 1,  .isfloating = 1 )
   RULE(.class   = "firefox",          .tags = 1 << 2,  .isfloating = 0 )
   RULE(.class   = "mpv",              .tags = 1 << 5,  .isfloating = 0 )
