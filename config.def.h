@@ -866,6 +866,7 @@ static const char *xkb_layouts[]  = {
 #if !NODMENU_PATCH
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 #endif // NODMENU_PATCH
+static const char *roficmd[]    = { "rofi", "-show", "run", NULL };
 static const char *audioctl[]   = { "pavucontrol", NULL };
 static const char *lockscrn[]   = { "betterlockscreen", "--lock", "dim", NULL };
 static const char *scrnshot[]   = { "screenshot", NULL };
@@ -937,7 +938,7 @@ static const Key keys[] = {
     #if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
-	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,          spawn,                  {.v = roficmd } },
 	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
 	#if RIODRAW_PATCH
 	{ MODKEY|ControlMask,           XK_p,          riospawnsync,           {.v = dmenucmd } },
