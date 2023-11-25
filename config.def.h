@@ -501,6 +501,10 @@ static const Rule rules[] = {
   RULE(.class   = "Pavucontrol",      .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Galculator",       .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Lxappearance",     .tags = 0,       .isfloating = 1 )
+  RULE(.class   = "nmtui",            .tags = 0,       .isfloating = 1 )
+  RULE(.class   = "bluetuith",        .tags = 0,       .isfloating = 1 )
+  RULE(.class   = "btop",             .tags = 0,       .isfloating = 1 )
+  RULE(.class   = "fkill",            .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Code",             .tags = 1 << 1,  .isfloating = 0 )
   RULE(.class   = "Gimp",             .tags = 1 << 1,  .isfloating = 1 )
   RULE(.class   = "ghb",              .tags = 1 << 1,  .isfloating = 1 )
@@ -873,15 +877,17 @@ static const char *xkb_layouts[]  = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 #endif // NODMENU_PATCH
 static const char *roficmd[]    = { "rofi", "-show", "combi", "-combi-modi", "drun,run", NULL };
-static const char *audioctl[]   = { "pavucontrol", NULL };
 static const char *lockscrn[]   = { "betterlockscreen", "--lock", "dim", NULL };
+static const char *audioctl[]   = { "pavucontrol", NULL };
 static const char *scrnshot[]   = { "screenshot", NULL };
 static const char *volup[]      = { "volume", "-i", NULL };
 static const char *voldown[]    = { "volume", "-d", NULL };
 static const char *volmute[]    = { "volume", "-m", NULL };
-static const char *netmcmd[]    = { "alacritty", "-e", "nmtui", NULL };
+static const char *btopcmd[]    = { "alacritty", "--class", "btop,btop", "-e", "btop", NULL };
+static const char *netmcmd[]    = { "alacritty", "--class", "nmtui,nmtui", "-e", "nmtui", NULL };
+static const char *fkillcmd[]   = { "alacritty", "--class", "fkill,fkill", "-e", "fkill", NULL };
 #ifdef BACKLIGHT_AND_BLUETOOTH
-static const char *bluecmd[]    = { "alacritty", "-e", "bluetuith", NULL };
+static const char *bluecmd[]    = { "alacritty", "--class", "bluetuith,bluetuith", "-e", "bluetuith", NULL };
 static const char *brightup[]   = { "backlight", "-i", NULL };
 static const char *brightdown[] = { "backlight", "-d", NULL };
 #endif
@@ -935,6 +941,8 @@ static const Key keys[] = {
     { 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
     { 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
     { MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
+    { MODKEY | ShiftMask,           XK_t,          spawn,                  {.v = btopcmd } },
+    { MODKEY | ShiftMask,           XK_k,          spawn,                  {.v = fkillcmd } },
 #ifdef BACKLIGHT_AND_BLUETOOTH
     { MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
     { 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = brightup } },
