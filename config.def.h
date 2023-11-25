@@ -451,7 +451,7 @@ static char *tagicons[][NUMTAGS] =
 #endif // NAMETAG_PATCH
 {
 	//[DEFAULT_TAGS]      = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
-	[DEFAULT_TAGS]        = { "term", "edit", "www", "util", "media", "misc", "misc", "bg", "bg" },
+	[DEFAULT_TAGS]        = { "term", "edit", "www", "util", "util", "media", "misc", "misc", "bg" },
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
 	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
 };
@@ -501,16 +501,22 @@ static const Rule rules[] = {
   RULE(.class   = "Pavucontrol",      .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Galculator",       .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Lxappearance",     .tags = 0,       .isfloating = 1 )
-  RULE(.class   = "Localsend",        .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Code",             .tags = 1 << 1,  .isfloating = 0 )
   RULE(.class   = "Gimp",             .tags = 1 << 1,  .isfloating = 1 )
+  RULE(.class   = "ghb",              .tags = 1 << 1,  .isfloating = 1 )
   RULE(.class   = "firefox",          .tags = 1 << 2,  .isfloating = 0 )
   RULE(.class   = "Nemo",             .tags = 1 << 3,  .isfloating = 0 )
-  RULE(.class   = "discord",          .tags = 1 << 5,  .isfloating = 0 )
-  RULE(.class   = "TelegramDesktop",  .tags = 1 << 5,  .isfloating = 0 )
-  RULE(.class   = "Spotify",          .tags = 1 << 4,  .isfloating = 0 )
+  RULE(.class   = "bottles",          .tags = 1 << 3,  .isfloating = 0 )
+  RULE(.class   = "goverlay",         .tags = 1 << 3,  .isfloating = 0 )
+  RULE(.class   = "steam",            .tags = 1 << 3,  .isfloating = 0 )
+  RULE(.class   = "obs",              .tags = 1 << 4,  .isfloating = 0 )
+  RULE(.class   = "Localsend",        .tags = 1 << 4,  .isfloating = 1 )
+  RULE(.class   = "carla",            .tags = 1 << 4,  .isfloating = 0 )
+  RULE(.class   = "Spotify",          .tags = 1 << 5,  .isfloating = 0 )
+  RULE(.class   = "haruna",           .tags = 1 << 5,  .isfloating = 0 )
+  RULE(.class   = "discord",          .tags = 1 << 6,  .isfloating = 0 )
+  RULE(.class   = "TelegramDesktop",  .tags = 1 << 6,  .isfloating = 0 )
   RULE(.class   = "qBittorrent",      .tags = 1 << 8,  .isfloating = 0 )
-  RULE(.class   = "obs",              .tags = 1 << 7,  .isfloating = 0 )
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
 	#elif SCRATCHPADS_PATCH
@@ -866,7 +872,7 @@ static const char *xkb_layouts[]  = {
 #if !NODMENU_PATCH
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 #endif // NODMENU_PATCH
-static const char *roficmd[]    = { "rofi", "-show", "run", NULL };
+static const char *roficmd[]    = { "rofi", "-show", "combi", "-combi-modi", "drun,run", NULL };
 static const char *audioctl[]   = { "pavucontrol", NULL };
 static const char *lockscrn[]   = { "betterlockscreen", "--lock", "dim", NULL };
 static const char *scrnshot[]   = { "screenshot", NULL };
