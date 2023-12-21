@@ -513,6 +513,7 @@ static const Rule rules[] = {
   RULE(.class   = "helvum",           .tags = 1 << 1,  .isfloating = 0 )
   RULE(.class   = "firefox",          .tags = 1 << 2,  .isfloating = 0 )
   RULE(.class   = "Zathura",          .tags = 1 << 3,  .isfloating = 0 )
+  RULE(.class   = "obsidian",         .tags = 1 << 3,  .isfloating = 0 )
   RULE(.class   = "libreoffice",      .tags = 1 << 3,  .isfloating = 0 )
   RULE(.class   = "discord",          .tags = 1 << 4,  .isfloating = 0 )
   RULE(.class   = "TelegramDesktop",  .tags = 1 << 4,  .isfloating = 0 )
