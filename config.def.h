@@ -503,6 +503,7 @@ static const Rule rules[] = {
   RULE(.class   = "Lxappearance",     .tags = 0,       .isfloating = 1 )
   RULE(.class   = "nmtui",            .tags = 0,       .isfloating = 1 )
   RULE(.class   = "bluetuith",        .tags = 0,       .isfloating = 1 )
+  RULE(.class   = "exbacklight",      .tags = 0,       .isfloating = 1 )
   RULE(.class   = "btop",             .tags = 0,       .isfloating = 1 )
   RULE(.class   = "fkill",            .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Localsend",        .tags = 0,       .isfloating = 1 )
@@ -889,10 +890,13 @@ static const char *volmute[]    = { "volume", "-m", NULL };
 static const char *btopcmd[]    = { "alacritty", "--class", "btop,btop", "-e", "btop", NULL };
 static const char *netmcmd[]    = { "alacritty", "--class", "nmtui,nmtui", "-e", "nmtui", NULL };
 static const char *fkillcmd[]   = { "alacritty", "--class", "fkill,fkill", "-e", "fkill", NULL };
-#ifdef BACKLIGHT_AND_BLUETOOTH
+#if BACKLIGHT_AND_BLUETOOTH
 static const char *bluecmd[]    = { "alacritty", "--class", "bluetuith,bluetuith", "-e", "bluetuith", NULL };
-static const char *brightup[]   = { "backlight", "-i", NULL };
-static const char *brightdown[] = { "backlight", "-d", NULL };
+static const char *backlightinc[] = { "backlight", "-i", NULL };
+static const char *backlightdec[] = { "backlight", "-d", NULL };
+#endif
+#if EXTERNAL_BACKLIGHT
+static const char *exbacklightcmd[] = { "alacritty", "--class", "exbacklight,exbacklight", "-o", "window.dimensions.columns=54", "-o", "window.dimensions.lines=12", "-e", "exbacklight", NULL };
 #endif
 static const char *dmenucmd[]   = {
 	"dmenu_run",
@@ -937,22 +941,24 @@ static const Key on_empty_keys[] = {
 
 static const Key keys[] = {
 	/* modifier                     key            function                argument */
-    { MODKEY | ShiftMask,           XK_a,          spawn,                  {.v = audioctl } },
-    { MODKEY | ShiftMask,           XK_l,          spawn,                  {.v = lockscrn } },
-    { 0,                            XK_Print,      spawn,                  {.v = scrnshot } },
-    { 0,                 XF86XK_AudioRaiseVolume,  spawn,                  {.v = volup } },
-    { 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
-    { 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
-    { MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
-    { MODKEY | ShiftMask,           XK_t,          spawn,                  {.v = btopcmd } },
-    { MODKEY | ShiftMask,           XK_k,          spawn,                  {.v = fkillcmd } },
-#ifdef BACKLIGHT_AND_BLUETOOTH
-    { MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
-    { 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = brightup } },
-    { 0,                 XF86XK_MonBrightnessDown, spawn,                  {.v = brightdown } },
+  { MODKEY | ShiftMask,           XK_a,          spawn,                  {.v = audioctl } },
+  { MODKEY | ShiftMask,           XK_l,          spawn,                  {.v = lockscrn } },
+  { 0,                            XK_Print,      spawn,                  {.v = scrnshot } },
+  { 0,                 XF86XK_AudioRaiseVolume,  spawn,                  {.v = volup } },
+  { 0,                 XF86XK_AudioLowerVolume,  spawn,                  {.v = voldown } },
+  { 0,                 XF86XK_AudioMute,         spawn,                  {.v = volmute } },
+  { MODKEY | ShiftMask,           XK_n,          spawn,                  {.v = netmcmd } },
+  { MODKEY | ShiftMask,           XK_t,          spawn,                  {.v = btopcmd } },
+  { MODKEY | ShiftMask,           XK_k,          spawn,                  {.v = fkillcmd } },
+#if BACKLIGHT_AND_BLUETOOTH
+  { MODKEY | ShiftMask,           XK_b,          spawn,                  {.v = bluecmd } },
+  { 0,                 XF86XK_MonBrightnessUp,   spawn,                  {.v = backlightinc } },
+  { 0,                 XF86XK_MonBrightnessDown, spawn,                  {.v = backlightdec } },
 #endif
-	
-    #if KEYMODES_PATCH
+#if EXTERNAL_BACKLIGHT
+  { MODKEY | ShiftMask,           XK_y,          spawn,                  {.v = exbacklightcmd } },
+#endif
+  #if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
 	{ MODKEY,                       XK_p,          spawn,                  {.v = roficmd } },
