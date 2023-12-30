@@ -18,7 +18,7 @@
  * This patch lets the user set the backlight intensity of an external display
  * via Display Data Channel Command Interface (DDC/CI).
  */
-#define EXTERNAL_BACKLIGHT 0
+#define EXTERNAL_BACKLIGHT 1
 
 /*
  * This patch enables bluetooth command and shortcut key. It also enables display
