@@ -503,7 +503,7 @@ static const Rule rules[] = {
   RULE(.class   = "Lxappearance",     .tags = 0,       .isfloating = 1 )
   RULE(.class   = "nmtui",            .tags = 0,       .isfloating = 1 )
   RULE(.class   = "bluetuith",        .tags = 0,       .isfloating = 1 )
-  RULE(.class   = "exbacklight",      .tags = 0,       .isfloating = 1 )
+  RULE(.class   = "backlight",        .tags = 0,       .isfloating = 1 )
   RULE(.class   = "btop",             .tags = 0,       .isfloating = 1 )
   RULE(.class   = "fkill",            .tags = 0,       .isfloating = 1 )
   RULE(.class   = "Localsend",        .tags = 0,       .isfloating = 1 )
@@ -882,23 +882,23 @@ static const char *xkb_layouts[]  = {
 #if !NODMENU_PATCH
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 #endif // NODMENU_PATCH
-static const char *roficmd[]    = { "rofi", "-show", "combi", "-combi-modi", "drun,run", NULL };
-static const char *lockscrn[]   = { "betterlockscreen", "--lock", "dim", NULL };
-static const char *audioctl[]   = { "pavucontrol", NULL };
-static const char *scrnshot[]   = { "screenshot", NULL };
-static const char *volup[]      = { "volume", "-i", NULL };
-static const char *voldown[]    = { "volume", "-d", NULL };
-static const char *volmute[]    = { "volume", "-m", NULL };
-static const char *btopcmd[]    = { "alacritty", "--class", "btop,btop", "-e", "btop", NULL };
-static const char *netmcmd[]    = { "alacritty", "--class", "nmtui,nmtui", "-e", "nmtui", NULL };
-static const char *fkillcmd[]   = { "alacritty", "--class", "fkill,fkill", "-e", "fkill", NULL };
+static const char *roficmd[]      = { "rofi", "-show", "combi", "-combi-modi", "drun,run", NULL };
+static const char *lockscrn[]     = { "betterlockscreen", "--lock", "dim", NULL };
+static const char *audioctl[]     = { "pavucontrol", NULL };
+static const char *scrnshot[]     = { "screenshot", NULL };
+static const char *volup[]        = { "volume", "-i", NULL };
+static const char *voldown[]      = { "volume", "-d", NULL };
+static const char *volmute[]      = { "volume", "-m", NULL };
+static const char *btopcmd[]      = { "alacritty", "--class", "btop,btop", "-e", "btop", NULL };
+static const char *netmcmd[]      = { "alacritty", "--class", "nmtui,nmtui", "-e", "nmtui", NULL };
+static const char *fkillcmd[]     = { "alacritty", "--class", "fkill,fkill", "-e", "fkill", NULL };
 #if BACKLIGHT_AND_BLUETOOTH
-static const char *bluecmd[]    = { "alacritty", "--class", "bluetuith,bluetuith", "-e", "bluetuith", NULL };
-static const char *backlightinc[] = { "backlight", "-i", NULL };
-static const char *backlightdec[] = { "backlight", "-d", NULL };
+static const char *bluecmd[]      = { "alacritty", "--class", "bluetuith,bluetuith", "-e", "bluetuith", NULL };
+static const char *backlightinc[] = { "backlight", "--int", "--inc", NULL };
+static const char *backlightdec[] = { "backlight", "--int", "--dec", NULL };
 #endif
 #if EXTERNAL_BACKLIGHT
-static const char *exbacklightcmd[] = { "alacritty", "--class", "exbacklight,exbacklight", "-o", "window.dimensions.columns=54", "-o", "window.dimensions.lines=12", "-e", "exbacklight", NULL };
+static const char *backlightset[] = { "alacritty", "--class", "backlight,backlight", "-o", "window.dimensions.columns=54", "-o", "window.dimensions.lines=12", "-e", "backlight", "--ext", NULL };
 #endif
 static const char *dmenucmd[]   = {
 	"dmenu_run",
@@ -958,7 +958,7 @@ static const Key keys[] = {
   { 0,                 XF86XK_MonBrightnessDown, spawn,                  {.v = backlightdec } },
 #endif
 #if EXTERNAL_BACKLIGHT
-  { MODKEY | ShiftMask,           XK_y,          spawn,                  {.v = exbacklightcmd } },
+  { MODKEY | ShiftMask,           XK_y,          spawn,                  {.v = backlightset } },
 #endif
   #if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
