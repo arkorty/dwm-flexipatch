@@ -381,6 +381,12 @@
  */
 #define BAR_PADDING_VANITYGAPS_PATCH 0
 
+/* Smart bar padding patch that automatically adjusts the padding when there is
+ * only one client on the monitor. Works well with vanitygaps and barpadding
+ * patches.
+ */
+#define BAR_PADDING_SMART_PATCH 0
+
 /* This patch adds simple markup for status messages using pango markup.
  * This depends on the pango library v1.44 or greater.
  * You need to uncomment the corresponding lines in config.mk to use the pango libraries
@@ -915,10 +921,21 @@
  */
 #define PERTAG_VANITYGAPS_PATCH 0
 
+/* This patch allows configuring vanity gaps on a per-monitor basis rather than
+ * all monitors (default).
+ */
+#define PERMON_VANITYGAPS_PATCH 0
+
 /* This controls whether or not to also store bar position on a per
  * tag basis, or leave it as one bar per monitor.
  */
 #define PERTAGBAR_PATCH 0
+
+/* Similar to the focusdir patch this patch allow users to move a window in any direction
+ * in the tiled stack (up, down, left, right).
+ * https://github.com/bakkeby/patches/wiki/placedir
+ */
+#define PLACEDIR_PATCH 0
 
 /* This patch lets you change the position of a client in the stack using the mouse.
  * https://github.com/bakkeby/patches/wiki/placemouse
