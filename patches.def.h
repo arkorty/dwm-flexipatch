@@ -14,18 +14,6 @@
  * Bar modules
  */
 
-/*
- * This patch lets the user set the backlight intensity of an external display
- * via Display Data Channel Command Interface (DDC/CI).
- */
-#define EXTERNAL_BACKLIGHT 0
-
-/*
- * This patch enables bluetooth command and shortcut key. It also enables display
- * backlight modulating shortcut keys.
- */
-#define BACKLIGHT_AND_BLUETOOTH 0
-
 /* Enhanced taskbar that shows the titles of all visible windows in the status bar
  * and allows focus / hiding / unhiding of windows by clicking on the status bar.
  * Awesomebar takes precedence over fancybar.
@@ -1034,7 +1022,7 @@
  * https://lists.suckless.org/hackers/2004/17205.html
  * https://dwm.suckless.org/patches/scratchpads/
  */
-#define SCRATCHPADS_PATCH 1
+#define SCRATCHPADS_PATCH 0
 
 /* Minor alteration of the above allowing clients to keep their size and position when shown */
 #define SCRATCHPADS_KEEP_POSITION_AND_SIZE_PATCH 0
