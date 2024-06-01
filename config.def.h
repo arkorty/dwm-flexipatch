@@ -521,6 +521,7 @@ static const Rule rules[] = {
   RULE(.class   = "qBittorrent",      .tags = 1 << 6,  .isfloating = 0 )
   RULE(.class   = "bottles",          .tags = 1 << 6,  .isfloating = 0 )
   RULE(.class   = "steam",            .tags = 1 << 6,  .isfloating = 0 )
+  RULE(.class   = "heroic",           .tags = 1 << 6,  .isfloating = 0 )
 	#if RENAMED_SCRATCHPADS_PATCH
 	RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
 	#elif SCRATCHPADS_PATCH
@@ -882,7 +883,7 @@ static const char *audioctl[]     = { "pavucontrol", NULL };
 static const char *scrnshot[]     = { "maim", "-u", "-s", "$HOME/Pictures/Screenshots/Screenshot_$(date +%Y%m%d_%H%M%S).png", NULL };
 static const char *volup[]        = { "wpctl", "set-volume", "-l", "0.8", "@DEFAULT_SINK@", "0.05+", NULL };
 static const char *voldown[]      = { "wpctl", "set-volume", "-l", "0.8", "@DEFAULT_SINK@", "0.05-", NULL };
-static const char *volmute[]      = { "wpctl", "set-volume", "@DEFAULT_SINK@", "toggle", NULL };
+static const char *volmute[]      = { "wpctl", "set-mute", "@DEFAULT_SINK@", "toggle", NULL };
 static const char *netmcmd[]      = { "alacritty", "--class", "floatingterm,floatingterm", "-e", "nmtui", NULL };
 static const char *bluecmd[]      = { "alacritty", "--class", "floatingterm,floatingterm", "-e", "bluetuith", NULL };
 static const char *backlightinc[] = { "xbacklight", "-inc", "5", "-steps", "5", NULL };
